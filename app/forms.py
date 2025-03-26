@@ -6,10 +6,10 @@ class CreateArticleForm(forms.Form):
     ARTICLE_STATUS = (
         ("draft", "draft"),
         ("inprogress", "inprogress"),
-        ("published", "published"),
+        ("published", "published")
     )
     title = forms.CharField(max_length=100)
-    status = forms.CharField(choices=ARTICLE_STATUS)
+    status = forms.ChoiceField(choices=ARTICLE_STATUS)
     content = forms.CharField(widget=forms.Textarea)
     word_count = forms.IntegerField()
     twitter_post = forms.CharField(widget=forms.Textarea, required=False)
