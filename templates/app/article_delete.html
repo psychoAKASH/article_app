@@ -1,11 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Delete Article</title>
-</head>
-<body>
+{% extends "app/base.html" %}
+{% block content %}
 <h1>Delete Article</h1>
 <p>Are you sure you want to delete this "{{ article.title }}"?</p>
 <form method="POST">
@@ -13,6 +7,4 @@
 
     <button type="submit">Yes Delete</button>
 </form>
-
-</body>
-</html>
+{% endblock content %}

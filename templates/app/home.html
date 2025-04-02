@@ -1,11 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Django Project</title>
-</head>
-<body>
+{% extends "app/base.html" %}
+{% block content %}
 <h1>
     Article
 </h1>
@@ -14,5 +8,4 @@
     <li>{{ article.title}} with {{article.word_count }} words.</li>
     {% endfor %}
 </ul>
-</body>
-</html>
+{% endblock content %}
