@@ -4,10 +4,14 @@
     Article
 </h1>
 <a href="{% url 'create_article' %}">Create Article</a>
-
+{% if articles %}
 <ul>
     {% for article in articles %}
-    <li><a href="{% url 'update_article' pk=article.id %}">{{ article.title}}</a> with {{article.word_count }} words.</li>
+    <li><a href="{% url 'update_article' pk=article.id %}">{{ article.title}}</a> with {{article.word_count }} words.
+    </li>
     {% endfor %}
 </ul>
+{% else %}
+<p>There is no article to show at the moment.</p>
+{% endif %}
 {% endblock content %}
