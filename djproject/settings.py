@@ -48,6 +48,20 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+if DEBUG:
+    INSTALLED_APPS += [
+        'debug_toolbar'
+    ]
+    MIDDLEWARE += [
+        'debug_toolbar.middleware.DebugToolbarMiddleware'
+    ]
+
+    import socket  # two line mentioned below are for docker's ip
+
+    hostname, _, ips = socket.gethostbyname_ex(socket.gethostname())
+    INTERNAL_IPS = [ip[:-1] + "1" for ip in ips] + ["127.0.0.1"]
+    INTERNAL_IPS += ["192.168.65.1"]
+
 ROOT_URLCONF = 'djproject.urls'
 
 TEMPLATES = [
