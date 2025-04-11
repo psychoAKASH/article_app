@@ -46,7 +46,9 @@ DJANGO_APPS = [
 
 THIRD_PARTY_APPS = [
     "allauth",
-    "allauth.account"
+    "allauth.account",
+    "allauth.socialaccount",
+    "allauth.socialaccount.providers.github"
 ]
 
 PROJECT_APPS = [
