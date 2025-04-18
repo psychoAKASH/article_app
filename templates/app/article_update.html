@@ -1,4 +1,4 @@
-{% extends "app/base.html" %}
+{% extends "app/layouts/base_form.html" %}
 {% block content %}
 <h1>Update Article</h1>
 <p>{{article.word_count}} word{{article.word_count | pluralize}}.</p>
@@ -12,14 +12,3 @@
 <a href="{% url 'delete_article' pk=articles.id %}"> Delete Article</a>
 {% endblock content %}
 
-{% block page_js %}
-<script>
-    const contentMarkdown = new EasyMDE({
-    element: document.getElementById("id_content"),
-    spellChecker: false,
-    status: false,
-    toolbar: false,
-    forceSync: true
-    });
-</script>
-{% endblock page_js %}
