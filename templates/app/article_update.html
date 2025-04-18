@@ -11,3 +11,15 @@
 <a href="{% url 'home' %}"> Back to list</a>
 <a href="{% url 'delete_article' pk=articles.id %}"> Delete Article</a>
 {% endblock content %}
+
+{% block page_js %}
+<script>
+    const contentMarkdown = new EasyMDE({
+    element: document.getElementById("id_content"),
+    spellChecker: false,
+    status: false,
+    toolbar: false,
+    forceSync: true
+    });
+</script>
+{% endblock page_js %}
