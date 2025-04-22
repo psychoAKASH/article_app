@@ -173,3 +173,7 @@ cython_debug/
 # PyPI configuration file
 .pypirc
 node_modules/
+
+
+# for the output.css build by the tailwindcss
+static/output.css
