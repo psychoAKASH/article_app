@@ -11,7 +11,8 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
-import dj_database_url
+
+# import dj_database_url
 
 # from telnetlib import AUTHENTICATION
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -117,11 +118,22 @@ WSGI_APPLICATION = 'djproject.wsgi.application'
 #         'PORT': '5432'
 #     }
 # }
-
+# _______for local development sqllite is used________
 DATABASES = {
-    'default': dj_database_url.config(conn_max_age=600)
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
 }
+
+# ______ for production postgresql is used________
+# DATABASES = {
+#     'default': dj_database_url.config(conn_max_age=600)
+# }
+
+
 # custom user models for the project
+
 AUTH_USER_MODEL = "app.UserProfile"
 
 # Password validation
@@ -167,6 +179,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = 'static/'
+
+STATICFILES_DIRS = [
+    BASE_DIR / "static"
+]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
