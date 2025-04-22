@@ -2,7 +2,7 @@ FROM python:3.12-bullseye
 ENV PYTHONUNBUFFERED=1
 
 
-RUN mkdir/code
+RUN mkdir /code
 
 WORKDIR /code
 
