@@ -21,7 +21,7 @@
                 <button type="submit"> Logout</button>
             </form>
             {% else %}
-            <a href="{% url 'account_login' %}">Log in</a>
+            <a class = 'button secondary text-sm' href="{% url 'account_login' %}">Log in</a>
             {% endif %}
         </li>
     </ul>
