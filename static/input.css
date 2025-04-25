@@ -1,7 +1,10 @@
+@import "tailwindcss";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
+@plugin "@tailwindcss/typography";
+@plugin "@tailwindcss/forms";
+@layer base {
 .button {
     @apply font-medium px-4  py-2 rounded-md;
 }
@@ -16,4 +19,5 @@
 
 .danger {
     @apply rounded-xl border border-red-400 bg-red-200 px-4 py-2 font-medium text-red-800 shadow-sm hover:bg-red-300 focus:outline-hidden focus:ring-red-200 focus:ring-offset-2;
+}
 }
