@@ -1,6 +1,28 @@
 {
   "dependencies": {
-    "@tailwindcss/cli": "^4.1.4",
+    "@tailwindcss/cli": "^4.1.4"
+  },
+  "name": "article_app",
+  "version": "1.0.0",
+  "description": "This repo is about the article website",
+  "main": "tailwind.config.js",
+  "devDependencies": {
+    "@tailwindcss/forms": "^0.5.10",
+    "@tailwindcss/typography": "^0.5.16",
     "tailwindcss": "^4.1.4"
-  }
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/psychoAKASH/article_app.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/psychoAKASH/article_app/issues"
+  },
+  "homepage": "https://github.com/psychoAKASH/article_app#readme"
 }
