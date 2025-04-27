@@ -11,6 +11,28 @@
     <script src="https://cdn.jsdelivr.net/npm/easymde/dist/easymde.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.8/dist/cdn.min.js"></script>
 
+   <style>
+.flash-message {
+  animation: slideFadeOut 2s ease-in-out 2s forwards;
+  height: auto; /* Prevents content shift */
+  overflow: hidden; /* Hides anything that goes outside the box during the animation */
+}
+@keyframes slideFadeOut {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  80% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-20px);
+    visibility: hidden;
+  }
+}
+</style>
     {% block extra_head %}
     {% endblock extra_head %}
 </head>
@@ -45,6 +67,16 @@
     </div>
 </nav>
 <div class="p-2 md:p-4 lg:p-6">
+    <div class="flex justify-center mt-2 text-gray-500 font-bold">
+        {% if messages %}
+        <ul>
+            {% for message in messages %}
+            <li class="flash-message border p-2 border-gray-400 bg-gray-200 rounded-md {{ message.tags }}"> {{ message }}
+            </li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </div>
     {% block base_content %}
 
     {% endblock base_content %}
