@@ -1,11 +1,20 @@
-{% extends "app/base.html" %}
-{% block content %}
-<h1>Delete Article</h1>
-<p>Are you sure you want to delete this "{{ article.title }}"?</p>
-<form method="POST">
-    {% csrf_token %}
+{% extends "base.html" %}
 
-    <button type="submit">Yes Delete</button>
+{% block head_title %}
+Delete Article
+{% endblock head_title %}
+
+{% block base_content %}
+<main class="max-w-2xl mx-auto flex flex-col items-center mt-10">
+<h1 class="subtitle">Delete Article</h1>
+<p class="text-lg">Are you sure you want to delete this "{{ articles.title }}"?</p>
+<form class="flex items-center gap-4" method="POST">
+    {% csrf_token %}
+    <button class="button danger" type="submit">Yes, Delete it</button>
+    <a class="button secondary" href="{% url 'home' %}">
+        {% include "svgs/arrow-left.svg" with class="inline-block w-6 h-6 mt-[-2px]" %}
+        No, Take me back
+    </a>
 </form>
-<a href="{% url 'home' %}"> Take me back</a>
-{% endblock content %}
+</main>
+{% endblock base_content %}
