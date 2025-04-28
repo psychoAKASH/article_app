@@ -1,5 +1,6 @@
 # from django.shortcuts import render, redirect
 from typing import Any
+import time
 from django.contrib import messages
 from django.db.models.query import QuerySet
 from django.urls import reverse_lazy
@@ -46,6 +47,7 @@ class ArticleListView(LoginRequiredMixin, ListView):
     context_object_name = 'articles'
     paginate_by = 5
     def get_queryset(self) -> QuerySet[Any]:
+        time.sleep(2)
         search = self.request.GET.get("search")
         queryset = super().get_queryset().filter(creator=self.request.user)
         if search:
