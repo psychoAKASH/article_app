@@ -8,10 +8,10 @@ Delete Article
 <main class="max-w-2xl mx-auto flex flex-col items-center mt-10">
 <h1 class="subtitle">Delete Article</h1>
 <p class="text-lg">Are you sure you want to delete this "{{ articles.title }}"?</p>
-<form class="flex items-center gap-4" method="POST">
+<form class="flex items-center gap-4" method="POST" action="{% url 'delete_article' articles.id %}">
     {% csrf_token %}
     <button class="button danger" type="submit">Yes, Delete it</button>
-    <a class="button secondary" href="{% url 'home' %}">
+    <a class="button secondary" href="{% url 'update_article' articles.id %}">
         {% include "svgs/arrow-left.svg" with class="inline-block w-6 h-6 mt-[-2px]" %}
         No, Take me back
     </a>

@@ -52,6 +52,8 @@ class ArticleListView(LoginRequiredMixin, ListView):
             queryset = queryset.filter(title__search=search)
         return queryset.order_by("-created_at")
 
+# class ArticleResultsView(ArticleListView):
+#     template_name = "app/article_results.html"
 
 class ArticleCreateView(LoginRequiredMixin, CreateView):
     template_name = 'app/article_create.html'
