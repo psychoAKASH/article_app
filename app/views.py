@@ -1,5 +1,7 @@
 # from django.shortcuts import render, redirect
 from typing import Any
+import time
+from django.contrib import messages
 from django.db.models.query import QuerySet
 from django.urls import reverse_lazy
 
@@ -43,10 +45,17 @@ class ArticleListView(LoginRequiredMixin, ListView):
     template_name = 'app/home.html'
     model = Article
     context_object_name = 'articles'
-
+    paginate_by = 5
     def get_queryset(self) -> QuerySet[Any]:
-        return Article.objects.filter(creator=self.request.user).order_by("-created_at")
+        time.sleep(2)
+        search = self.request.GET.get("search")
+        queryset = super().get_queryset().filter(creator=self.request.user)
+        if search:
+            queryset = queryset.filter(title__search=search)
+        return queryset.order_by("-created_at")
 
+# class ArticleResultsView(ArticleListView):
+#     template_name = "app/article_results.html"
 
 class ArticleCreateView(LoginRequiredMixin, CreateView):
     template_name = 'app/article_create.html'
@@ -78,3 +87,7 @@ class ArticleDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
     def test_func(self) -> bool | None:
         return self.request.user == self.get_object().creator
+
+    def post(self, request, *args, **kwargs):
+        messages.success(request, "Article deleted successfully", extra_tags="destructive")
+        return super().post(request, *args, **kwargs)
