@@ -12,7 +12,9 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 import os
-# import dj_database_url
+import dj_database_url
+
+ENV_STATE = os.getenv("ENV_STATE")
 
 # from telnetlib import AUTHENTICATION
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -22,12 +24,18 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-thoj0hic-)zgucc30a%-_zn3p5izy&b$@&di!pw*n0rpmc*f7e'
+SECRET_KEY = os.getenv("SECRET_KEY")  # 'djdji-insecure-thoj0hic-)zgucc30a%-_zn3p5izy&b$@&di!pw*n0rpmc*f7e'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv("DEBUG", "Fales") == "True"
 
 ALLOWED_HOSTS = []
+
+ADMIN_URL = os.getenv("ADMIN_URL", "admin")
+
+if ENV_STATE == "production":
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
 
 AUTHENTICATION_BACKENDS = [
     "allauth.account.auth_backends.AuthenticationBackend"
@@ -54,7 +62,8 @@ THIRD_PARTY_APPS = [
     "allauth.account",
     "allauth.socialaccount",
     "allauth.socialaccount.providers.github",
-    "widget_tweaks"
+    "widget_tweaks",
+    "whitenoise.runserver_nostatic"
 ]
 
 PROJECT_APPS = [
@@ -65,6 +74,7 @@ INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + PROJECT_APPS
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -122,18 +132,17 @@ WSGI_APPLICATION = 'djproject.wsgi.application'
 #     }
 # }
 # _______for local development sqllite is used________
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
-
-# ______ for production postgresql is used________
 # DATABASES = {
-#     'default': dj_database_url.config(conn_max_age=600)
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
 # }
 
+# ______ for production postgresql is used________
+DATABASES = {
+    'default': dj_database_url.config(conn_max_age=600)
+}
 
 # custom user models for the project
 
@@ -157,7 +166,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-DEFAULT_FROM_EMAIL = os.getenv("BREVO_EMAIL","None")
+DEFAULT_FROM_EMAIL = os.getenv("BREVO_EMAIL", "None")
 ANYMAIL = {
     "BREVO_API_KEY": os.getenv("BREVO_API_KEY", "None"),
     "SEND_DEFAULTS": {"tags": ["djangoproject"]}
@@ -195,6 +204,16 @@ STATICFILES_DIRS = [
     BASE_DIR / "static"
 ]
 
+STATIC_ROOT = BASE_DIR / "staticfiles"
+
+STORAGES = {
+    "defalut": {
+        "BACKEND": "django.core.files.storage.FileSystemStorage"
+    },
+    "staticfiles":{
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage"
+    }
+}
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
