@@ -2,6 +2,8 @@
 from django.utils import timezone
 
 from django.db import migrations
+from allauth.account.models import EmailAddress
+from allauth.account.utils import user_email
 
 
 class Migration(migrations.Migration):
@@ -22,6 +24,11 @@ class Migration(migrations.Migration):
         )
         superuser.save()
 
+        email, created = EmailAddress.objects.get_or_create(
+            user=superuser, email=user_email(superuser)
+        )
+        email.verified = True
+        email.save()
     operations = [
         migrations.RunPython(create_superuser)
     ]

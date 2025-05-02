@@ -20,6 +20,7 @@ from django.urls import path, include
 from django.views.generic.base import RedirectView
 
 from allauth.account.views import SignupView
+from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -28,5 +29,9 @@ urlpatterns = [
     path("account/signup/", RedirectView.as_view(url="/")),
     path("accounts/", include("allauth.urls")),
     # path("", RedirectView.as_view(pattern_name="home")),
-    path("__debug__/", include('debug_toolbar.urls'))  # for dev only
 ]
+if settings.DEBUG:
+    urlpatterns += [
+        path("__debug__/", include('debug_toolbar.urls'))  # for dev only
+
+    ]
