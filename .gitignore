@@ -177,3 +177,6 @@ node_modules/
 
 # for the output.css build by the tailwindcss
 static/output.css
+
+# for static files directory
+staticfiles/
