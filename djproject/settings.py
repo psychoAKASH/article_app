@@ -29,7 +29,7 @@ SECRET_KEY = os.getenv("SECRET_KEY")  # 'djdji-insecure-thoj0hic-)zgucc30a%-_zn3
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv("DEBUG", "Fales") == "True"
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['article-app-tsfc.onrender.com']
 
 ADMIN_URL = os.getenv("ADMIN_URL", "admin")
 
