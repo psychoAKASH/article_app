@@ -12,14 +12,14 @@
 </head>
 <body>
 <nav class="px-10 py-4 border-b border-gray-300 shadow-md">
-    <div>
+    <div class="flex justify-end items-center gap-6  max-w-7xl mx-auto">
             {% if user.is_authenticated %}
             <a class="button primary" href="{% url 'create_article' %}">Create new</a>
-            <a class="hover:underline" href="{% url 'home' %}">Article</a>
-            <a class="hover:underline" href="{% url 'account_email' %}">Change email</a>
+            <a class="hover:inset-shadow-underline" href="{% url 'home' %}">Article</a>
+            <a class="hover:inset-shadow-underline" href="{% url 'account_email' %}">Change email</a>
             <form method="POST" action="{% url 'account_logout' %}">
                 {% csrf_token %}
-                <button class="" type="submit"> Logout</button>
+                <button class="hover:inset-shadow-underline" type="submit"> Logout</button>
             </form>
             {% else %}
             <a class = 'button secondary text-sm' href="{% url 'account_login' %}">Log in</a>
