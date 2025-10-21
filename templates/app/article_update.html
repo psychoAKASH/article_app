@@ -1,7 +1,7 @@
 {% extends "app/layouts/base_form.html" %}
 {% block content %}
 <h1>Update Article</h1>
-<p>{{article.word_count}} word{{article.word_count | pluralize}}.</p>
+<p>{{articles.word_count}} word{{articles.word_count | pluralize}}.</p>
 <p>Last updated on {{ articles.updated_at | date:"jS F Y"}}</p>
 <form method="POST">
     {% csrf_token %}
